@@ -35,24 +35,23 @@
 
 // Other Mods
 
-#define SERVO3_PIN                            12  // PB6 ** Pin25 ** D12
-#define PS_ON_PIN                              2  // X+ // PE4 ** Pin6  ** PWM2       **MUST BE HARDWARE PWM
-#define FILWIDTH_PIN                          15  // Y+ // PJ0 ** Pin63 ** USART3_RX  **Pin should have a pullup!
-#define FIL_RUNOUT_PIN                        19  // Z+ // PD2 ** Pin45 ** USART1_RX
+#define SERVO0_PIN      -1
+#define SERVO1_PIN      -1
+#define SERVO2_PIN      -1
+#define SERVO3_PIN      -1
 
-#ifndef RGB_LED_R_PIN
-  #define RGB_LED_R_PIN                       50
-#endif
-#ifndef RGB_LED_R_PIN
-  #define RGB_LED_G_PIN                       51
-#endif
-#ifndef RGB_LED_R_PIN
-  #define RGB_LED_B_PIN                       52
-#endif
+#define X_MIN_PIN        3 // X-
+#define X_MAX_PIN       -1 // 2 // X+
+#define Y_MIN_PIN       14 // Y-
+#define Y_MAX_PIN       -1 // 15 // Y+
+#define Z_MIN_PIN       18 // Z-
+#define Z_MAX_PIN       -1 // 19 // Z+
+#define Z_MIN_PROBE_PIN 18
 
-#ifndef CASE_LIGHT_PIN
-  #define CASE_LIGHT_PIN                      11  // PB5 ** Pin24 ** PWM11
-#endif
+#define CASE_LIGHT_PIN  11
+#define PS_ON_PIN       12
+#define FILWIDTH_PIN    -1
+#define FIL_RUNOUT_PIN   2
 
 #include "pins_MKS_BASE_common.h" // ... RAMPS
 
@@ -87,16 +86,16 @@
 
   XS3 Connector
    =================
-   | 65 | GND | 5V |      (65)  PK3 ** Pin86 ** A11
+   | 65 | GND | 5V |      (65)  PK3 ** Pin86 ** A11 | Controller fan
    |----|-----|----|
-   | 66 | GND | 5V |      (66)  PK4 ** Pin85 ** A12
+   | 66 | GND | 5V |      (66)  PK4 ** Pin85 ** A12 | Extruder fan
    =================
 
   Servos Connector
    =================
-   | 11 | GND | 5V |      (11)  PB5 ** Pin24 ** PWM11
+   | 11 | GND | 5V |      (11)  PB5 ** Pin24 ** PWM11 | Case Light
    |----|-----|----|
-   | 12 | GND | 5V |      (12)  PB6 ** Pin25 ** PWM12
+   | 12 | GND | 5V |      (12)  PB6 ** Pin25 ** PWM12 | PSU
    =================
 
   ICSP
@@ -108,12 +107,12 @@
 
   XS6/AUX-1 Connector
    ======================
-   | 5V | GND | NC | 20 | (20)  PD1 ** Pin44 ** I2C_SDA
+   | 5V | GND | NC | 20 | (20)  PD1 ** Pin44 ** I2C_SDA | power check
    |----|-----|----|----|
    | 50 |  51 | 52 | 21 | (50)  PB3 ** Pin22 ** SPI_MISO
    ====================== (51)  PB2 ** Pin21 ** SPI_MOSI
                           (52)  PB1 ** Pin20 ** SPI_SCK
-                          (21)  PD0 ** Pin43 ** I2C_SCL
+                          (21)  PD0 ** Pin43 ** I2C_SCL | custom button
 
   Temperature
    ==================================
@@ -125,17 +124,17 @@
 
   Limit Switches
    ============
-   |  2 | GND | X+        ( 2)  PE4 ** Pin6  ** PWM2
+   |  2 | GND | X+        ( 2)  PE4 ** Pin6  ** PWM2 | runout
    |----|-----|
    |  3 | GND | X-        ( 3)  PE5 ** Pin7  ** PWM3
    |----|-----|
-   | 15 | GND | Y+        (15)  PJ0 ** Pin63 ** USART3_RX
+   | 15 | GND | Y+        (15)  PJ0 ** Pin63 ** USART3_RX | Z-
    |----|-----|
    | 14 | GND | Y-        (14)  PJ1 ** Pin64 ** USART3_TX
    |----|-----|
-   | 19 | GND | Z+        (19)  PD2 ** Pin45 ** USART1_RX
+   | 19 | GND | Z+        (19)  PD2 ** Pin45 ** USART1_RX | Serial
    |----|-----|
-   | 18 | GND | Z-        (18)  PD3 ** Pin46 ** USART1_TX
+   | 18 | GND | Z-        (18)  PD3 ** Pin46 ** USART1_TX | Serial
    ============
 
   EXP1
