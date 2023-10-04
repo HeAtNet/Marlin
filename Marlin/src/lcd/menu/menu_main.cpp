@@ -236,6 +236,13 @@ void menu_configuration();
   #endif
 #endif
 
+
+#if ENABLED(CASE_LIGHT_MAIN_MENU)
+  #include "../../feature/caselight.h"
+
+  #define CASELIGHT_TOGGLE_ITEM() EDIT_ITEM(bool, MSG_CASE_LIGHT, (bool*)&caselight.on, caselight.update_enabled)
+#endif
+
 void menu_main() {
   const bool busy = printingIsActive()
     #if HAS_MEDIA
@@ -394,6 +401,14 @@ void menu_main() {
       GCODES_ITEM(MSG_SWITCH_PS_ON, F("M80"));
   #endif
 
+  #if ENABLED(ADVANCED_PAUSE_FEATURE) && DISABLED(DISABLE_ENCODER)
+    FILAMENT_CHANGE_ITEM();
+  #endif
+
+  #if ENABLED(CASE_LIGHT_MAIN_MENU)
+    CASELIGHT_TOGGLE_ITEM();
+  #endif
+
   #if HAS_MEDIA && DISABLED(MEDIA_MENU_AT_TOP)
     // BEGIN MEDIA MENU
     #if ENABLED(MENU_ADDAUTOSTART)
@@ -403,7 +418,7 @@ void menu_main() {
     if (card_detected) {
       if (!card_open) {
         #if HAS_SD_DETECT
-          GCODES_ITEM(MSG_CHANGE_MEDIA, F("M21" TERN_(MULTI_VOLUME, "S"))); // M21 Change Media
+          // GCODES_ITEM(MSG_CHANGE_MEDIA, F("M21" TERN_(MULTI_VOLUME, "S"))); // M21 Change Media
           #if ENABLED(MULTI_VOLUME)
             GCODES_ITEM(MSG_ATTACH_USB_MEDIA, F("M21U")); // M21 Attach USB Media
           #endif
@@ -501,10 +516,6 @@ void menu_main() {
         GET_TEXT_F(MSG_HOST_SHUTDOWN), (const char *)nullptr, F("?")
       );
     });
-  #endif
-
-  #if ENABLED(ADVANCED_PAUSE_FEATURE) && DISABLED(DISABLE_ENCODER)
-    FILAMENT_CHANGE_ITEM();
   #endif
 
   END_MENU();

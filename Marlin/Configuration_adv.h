@@ -755,7 +755,8 @@
   #define CASE_LIGHT_DEFAULT_BRIGHTNESS 255   // Set default power-up brightness (0-255, requires PWM pin)
   //#define CASE_LIGHT_NO_BRIGHTNESS          // Disable brightness control. Enable for non-PWM lighting.
   //#define CASE_LIGHT_MAX_PWM 128            // Limit PWM duty cycle (0-255)
-  #define CASE_LIGHT_MENU                   // Add Case Light options to the LCD menu
+  // #define CASE_LIGHT_MENU                   // Add Case Light options to the LCD menu
+  #define CASE_LIGHT_MAIN_MENU
   #if ENABLED(NEOPIXEL_LED)
     //#define CASE_LIGHT_USE_NEOPIXEL         // Use NeoPixel LED as case light
   #endif
@@ -1526,7 +1527,7 @@
   #define PREHEAT_SHORTCUT_MENU_ITEM
 
   // Add Configuration > Debug Menu > Endstop Test for endstop/probe/runout testing
-  #define LCD_ENDSTOP_TEST
+  //#define LCD_ENDSTOP_TEST
 
 #endif // HAS_MARLINUI_MENU
 
@@ -1543,7 +1544,7 @@
    */
   #define SHOW_BOOTSCREEN                 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
   #if ENABLED(SHOW_BOOTSCREEN)
-    #define BOOTSCREEN_TIMEOUT 3000       // (ms) Total Duration to display the boot screen(s)
+    #define BOOTSCREEN_TIMEOUT 2000       // (ms) Total Duration to display the boot screen(s)
     #if ANY(HAS_MARLINUI_U8GLIB, TFT_COLOR_UI)
       #define BOOT_MARLIN_LOGO_SMALL      // Show a smaller Marlin logo on the Boot Screen (saving lots of flash)
     #endif
@@ -1569,7 +1570,7 @@
   #define STATUS_MESSAGE_SCROLLING
 
   // Apply a timeout to low-priority status messages
-  // #define STATUS_MESSAGE_TIMEOUT_SEC 30 // (seconds)
+  //#define STATUS_MESSAGE_TIMEOUT_SEC 30 // (seconds)
 
   // On the Info Screen, display XY with one decimal place when possible
   //#define LCD_DECIMAL_SMALL_XY
@@ -1680,7 +1681,7 @@
   //#define ONE_CLICK_PRINT                 // Prompt to print the newest file on inserted media
   #define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
 
-  #define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
+  //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
   #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
@@ -1762,9 +1763,9 @@
   // LCD's font must contain the characters. Check your selected LCD language.
   //#define UTF_FILENAME_SUPPORT
 
-  //#define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
-  //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
-  //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
+  #define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
+  #define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
+  #define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
   #define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
@@ -1851,7 +1852,7 @@
   //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  //#define BINARY_FILE_TRANSFER
+  #define BINARY_FILE_TRANSFER
 
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
@@ -3894,7 +3895,7 @@
 // @section custom main menu
 
 // Custom Menu: Main Menu
-#define CUSTOM_MENU_MAIN
+// #define CUSTOM_MENU_MAIN
 #if ENABLED(CUSTOM_MENU_MAIN)
   #define CUSTOM_MENU_MAIN_TITLE "Custom Commands"
   // #define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 User Script Done"
@@ -4363,8 +4364,8 @@
 #if ENABLED(PRINTCOUNTER)
   #define SERVICE_WARNING_BUZZES  3
   // Activate up to 3 service interval watchdogs
-  #define SERVICE_NAME_1      "100h Service"
-  #define SERVICE_INTERVAL_1  100 // print hours
+  //#define SERVICE_NAME_1      "100h Service"
+  //#define SERVICE_INTERVAL_1  100 // print hours
   //#define SERVICE_NAME_2      "Service L"
   //#define SERVICE_INTERVAL_2  200 // print hours
   //#define SERVICE_NAME_3      "Service 3"

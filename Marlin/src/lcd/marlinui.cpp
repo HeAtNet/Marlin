@@ -1771,12 +1771,21 @@ void MarlinUI::host_notify(const char * const cstr) {
         OPTITEM(SHOW_INTERACTION_TIME, drawInter)
       };
       static bool prev_blink;
-      static uint8_t i;
-      if (prev_blink != get_blink()) {
-        prev_blink = get_blink();
-        if (++i >= COUNT(progFunc)) i = 0;
-        (*progFunc[i])();
-      }
+      #if LCD_INFO_SCREEN_STYLE == 2
+        if (prev_blink != get_blink()) {
+          prev_blink = get_blink();
+          (*progFunc[0])();
+          (*progFunc[1])();
+          (*progFunc[2])();
+        }
+      #else
+        static uint8_t i;
+        if (prev_blink != get_blink()) {
+          prev_blink = get_blink();
+          if (++i >= COUNT(progFunc)) i = 0;
+          (*progFunc[i])();
+        }
+      #endif
     }
 
   #endif // LCD_WITH_BLINK && HAS_EXTRA_PROGRESS

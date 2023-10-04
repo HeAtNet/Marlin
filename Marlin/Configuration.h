@@ -119,7 +119,7 @@
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "HeAt 3D Printer"
 #define STRING_DISTRIBUTION_DATE __DATE__
-#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION "bugfix-2.1.x (HeAt)"
+#define SHORT_BUILD_VERSION "bugfix-2.1.x HeAt"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -833,7 +833,7 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
 #endif
 
 // @section safety
@@ -1159,11 +1159,11 @@
  * Endstop "Hit" State
  * Set to the state (HIGH or LOW) that applies to each endstop.
  */
-#define X_MIN_ENDSTOP_HIT_STATE HIGH
+#define X_MIN_ENDSTOP_HIT_STATE LOW
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
-#define Y_MIN_ENDSTOP_HIT_STATE HIGH
+#define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_ENDSTOP_HIT_STATE HIGH
+#define Z_MIN_ENDSTOP_HIT_STATE LOW
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1177,7 +1177,7 @@
 #define V_MAX_ENDSTOP_HIT_STATE HIGH
 #define W_MIN_ENDSTOP_HIT_STATE HIGH
 #define W_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_PROBE_ENDSTOP_HIT_STATE HIGH
+#define Z_MIN_PROBE_ENDSTOP_HIT_STATE LOW
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -2607,9 +2607,9 @@
 /**
  * Info Screen Style (0:Classic, 1:Průša)
  *
- * :[0:'Classic', 1:'Průša']
+ * :[0:'Classic', 1:'Průša', 2:'HeAt']
  */
-#define LCD_INFO_SCREEN_STYLE 0
+#define LCD_INFO_SCREEN_STYLE 2
 
 /**
  * SD CARD
@@ -3424,7 +3424,7 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
