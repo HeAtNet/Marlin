@@ -817,9 +817,9 @@ void MarlinUI::draw_status_message(const bool blink) {
         timepos = TPOFFSET - remaint.toDigital(buffer);
         TERN_(NOT(LCD_INFO_SCREEN_STYLE), lcd_put_lchar(timepos - 1, 2, 0x20);)
         #if LCD_INFO_SCREEN_STYLE == 2
-        lcd_put_lchar(14, 2, 'R');
+          lcd_moveto(15, 2);
         #else
-        lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'R');
+          lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'R');
         #endif
         lcd_put_u8str(buffer);
       }
@@ -845,9 +845,9 @@ void MarlinUI::draw_status_message(const bool blink) {
         timepos = TPOFFSET - elapsedt.toDigital(buffer);
         TERN_(NOT(LCD_INFO_SCREEN_STYLE), lcd_put_lchar(timepos - 1, 2, 0x20);)
         #if LCD_INFO_SCREEN_STYLE == 2
-        lcd_put_lchar(7, 2, 'E');
+          lcd_put_lchar(8, 2, LCD_STR_CLOCK[0]);
         #else
-        lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'E');
+          lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'E');
         #endif
         lcd_put_u8str(buffer);
       }
