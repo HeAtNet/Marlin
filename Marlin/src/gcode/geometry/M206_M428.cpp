@@ -75,7 +75,7 @@ void GcodeSuite::M206_report(const bool forReplay/*=true*/) {
  *       is the reference-point. Otherwise it uses 0. This allows
  *       the Z offset to be set near the bed when using a max endstop.
  *
- *       M428 can't be used more than 2cm away from 0 or an endstop.
+ *       M428 can't be used more than 3cm away from 0 or an endstop.
  *
  *       Use M206 to set these values directly.
  */
@@ -85,9 +85,9 @@ void GcodeSuite::M428() {
   xyz_float_t diff;
   LOOP_NUM_AXES(i) {
     diff[i] = base_home_pos((AxisEnum)i) - current_position[i];
-    if (!WITHIN(diff[i], -20, 20) && home_dir((AxisEnum)i) > 0)
+    if (!WITHIN(diff[i], -30, 30) && home_dir((AxisEnum)i) > 0)
       diff[i] = -current_position[i];
-    if (!WITHIN(diff[i], -20, 20)) {
+    if (!WITHIN(diff[i], -30, 30)) {
       SERIAL_ERROR_MSG(STR_ERR_M428_TOO_FAR);
       LCD_ALERTMESSAGE(MSG_ERR_M428_TOO_FAR);
       ERR_BUZZ();
