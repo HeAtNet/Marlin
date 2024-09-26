@@ -800,6 +800,13 @@ void MarlinUI::draw_status_message(const bool blink) {
         lcd_put_u8str(TERN(PRINT_PROGRESS_SHOW_DECIMALS, permyriadtostr4(ui.get_progress_permyriad()), ui8tostr3rj(progress)));
         lcd_put_u8str(F("%"));
       }
+      #if LCD_INFO_SCREEN_STYLE == 2
+        else if(printJobOngoing()) {
+          lcd_moveto(pc, pr);
+          lcd_put_u8str(F(TERN(IS_SD_PRINTING, "SD", "P:")));
+          lcd_put_u8str(F("---%"));
+        }
+      #endif
     }
   #endif
 
@@ -809,7 +816,11 @@ void MarlinUI::draw_status_message(const bool blink) {
         const duration_t remaint = ui.get_remaining_time();
         timepos = TPOFFSET - remaint.toDigital(buffer);
         TERN_(NOT(LCD_INFO_SCREEN_STYLE), lcd_put_lchar(timepos - 1, 2, 0x20);)
-        lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'R');
+        #if LCD_INFO_SCREEN_STYLE == 2
+          lcd_moveto(15, 2);
+        #else
+          lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'R');
+        #endif
         lcd_put_u8str(buffer);
       }
     }
@@ -833,7 +844,11 @@ void MarlinUI::draw_status_message(const bool blink) {
         const duration_t elapsedt = print_job_timer.duration();
         timepos = TPOFFSET - elapsedt.toDigital(buffer);
         TERN_(NOT(LCD_INFO_SCREEN_STYLE), lcd_put_lchar(timepos - 1, 2, 0x20);)
-        lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'E');
+        #if LCD_INFO_SCREEN_STYLE == 2
+          lcd_put_lchar(8, 2, LCD_STR_CLOCK[0]);
+        #else
+          lcd_put_lchar(TERN(LCD_INFO_SCREEN_STYLE, 11, timepos), 2, 'E');
+        #endif
         lcd_put_u8str(buffer);
       }
     }
@@ -870,6 +885,12 @@ void MarlinUI::draw_status_message(const bool blink) {
  *  |T000/000°  Z 000.00 |
  *  |T000/000°  F---%    |
  *  |B000/000°  SD---%   |
+ *  |01234567890123456789|
+ * 
+ *  LCD_INFO_SCREEN_STYLE 2 : HeAt Status Screen
+ *  |T000/000°  T000/000°|
+ *  |B000/000°  F---%    |
+ *  |P:---% T--:-- T--:--|
  *  |01234567890123456789|
  */
 
@@ -1139,7 +1160,28 @@ void MarlinUI::draw_status_screen() {
       TERN_(SHOW_PROGRESS_PERCENT, setPercentPos(LCD_WIDTH - 9, 2));
       rotate_progress();
     #endif
-  #endif // LCD_INFO_SCREEN_STYLE 1
+
+  #elif LCD_INFO_SCREEN_STYLE == 2
+
+    // ========== Line 1 ==========
+
+    _draw_heater_status(H_E0, LCD_STR_THERMOMETER[0], blink);
+    lcd_moveto(11, 0);
+    _draw_heater_status(H_E1, LCD_STR_THERMOMETER[0], blink);
+
+    // ========== Line 2 ==========
+
+    lcd_moveto(0, 1);
+    _draw_bed_status(blink);
+
+    lcd_put_lchar(11, 1, LCD_STR_FEEDRATE[0]);
+    lcd_put_u8str(i16tostr3rj(feedrate_percentage));
+    lcd_put_u8str(F("%"));
+
+    // ========== Line 3 ==========
+    rotate_progress();
+
+  #endif // LCD_INFO_SCREEN_STYLE 2
 
   // ========= Last Line ========
 

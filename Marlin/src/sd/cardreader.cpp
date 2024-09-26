@@ -209,7 +209,7 @@ bool CardReader::is_visible_entity(const dir_t &p OPTARG(CUSTOM_FIRMWARE_UPLOAD,
     constexpr bool onlyBin = false;
   #endif
 
-  if ( (p.attributes & DIR_ATT_HIDDEN)                  // Hidden by attribute
+  if ( (p.attributes & DIR_ATT_HIDDEN || longFilename[0] == '.')                  // Hidden by attribute
     // When readDir() > 0 these must be false:
     //|| pn0 == DIR_NAME_FREE || pn0 == DIR_NAME_DELETED  // Clear or Deleted entry
     //|| pn0 == '.' || longFilename[0] == '.'             // Hidden file

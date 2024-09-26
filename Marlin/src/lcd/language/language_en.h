@@ -53,7 +53,7 @@ namespace LanguageNarrow_en {
   LSTR LANGUAGE                           = _UxGT("English");
 
   // These strings should be translated
-  LSTR WELCOME_MSG                        = MACHINE_NAME _UxGT(" Ready.");
+  LSTR WELCOME_MSG                        = _UxGT("   Printer ready.");
   LSTR MSG_YES                            = _UxGT("YES");
   LSTR MSG_NO                             = _UxGT("NO");
   LSTR MSG_HIGH                           = _UxGT("HIGH");
@@ -135,7 +135,7 @@ namespace LanguageNarrow_en {
   LSTR MSG_PREHEAT_M_SETTINGS             = _UxGT("Preheat $ Conf");
 
   LSTR MSG_PREHEAT_HOTEND                 = _UxGT("Preheat Hotend");
-  LSTR MSG_PREHEAT_CUSTOM                 = _UxGT("Preheat Custom");
+  LSTR MSG_PREHEAT_CUSTOM                 = _UxGT("Preheat");
   LSTR MSG_COOLDOWN                       = _UxGT("Cooldown");
 
   LSTR MSG_CUTTER_FREQUENCY               = _UxGT("Frequency");
